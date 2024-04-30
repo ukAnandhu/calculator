@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Calculator</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'><link rel="stylesheet" href="{% static 'assets/style.css' %}">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<form class="" action="{% url 'calculate' %}" method="post">
+  {% csrf_token %}
+  <div class="container">
+    <div class="calc-body">
+      <div class="calc-screen">
+           <input 
+                type="text" 
+                id="expression" 
+                name="expression" 
+                readonly value="{{result}}"
+                style="height: 50%;width: 100%;text-align: right;font-size: 18px;"
+          >
+      </div>
+      <div class="calc-button-row">
+        <div class="button c" onclick="clearDisplay()" >C</div>
+        <div class="button l" onclick="appendToInput('(')">(</div>
+        <div class="button l" onclick="appendToInput(')')">)</div>
+        <div class="button l" onclick="appendToInput('/')">&#247;</div>
+      </div>
+      <div class="calc-button-row">
+        <div class="button" onclick="appendToInput('7')" id="num7">7</div>
+        <div class="button" onclick="appendToInput('8')" >8</div>
+        <div class="button"  onclick="appendToInput('9')">9</div>
+        <div class="button l" onclick="appendToInput('*')">x</div>
+      </div>
+      <div class="calc-button-row">
+        <div class="button" onclick="appendToInput('4')">4</div>
+        <div class="button" onclick="appendToInput('5')">5</div>
+        <div class="button" onclick="appendToInput('6')">6</div>
+        <div class="button l" onclick="appendToInput('-')">-</div>
+      </div>
+      <div class="calc-button-row">
+        <div class="button" onclick="appendToInput('1')"  name="num1" id="num1">1</div>
+        <div class="button" onclick="appendToInput('2')" name="num2" id="num2">2</div>
+        <div class="button" onclick="appendToInput('3')" >3</div>
+        <div class="button l" id="operation" name="operation" onclick="appendToInput('+')">+</div>
+      </div>
+      <div class="calc-button-row">
+        <div class="button" onclick="appendToInput('.')">.</div>
+        <div class="button" onclick="appendToInput('0')" >0</div>
+        <div class="button" onclick="appendToInput('%')">%</div>
+            <button class="button l" type="submit" >=</button>
+        </div>
+      </div>
+    </div>
+</form>
+    <script type="text/javascript">
+            function appendToInput(value) {
+                document.getElementById('expression').value += value;
+            }  
+            function clearDisplay() {
+                    document.getElementById('expression').value = '';
+            }
+    </script>
+</body>
+
+</html>
